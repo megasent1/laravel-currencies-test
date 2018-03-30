@@ -15,8 +15,21 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('component-currency', require('./components/currency.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    methods: {
+        reload() {
+            this.$refs.curr.fetchData()
+        },
+        time() {
+            let self = this;
+            this.$refs.curr.fetchData();
+            setTimeout(self.time, 15000)
+        },
+    },
+    mounted: function() {
+        this.time()
+    }
 });
